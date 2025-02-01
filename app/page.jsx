@@ -33,8 +33,8 @@ const HomePage = () => {
       <table className={styles.busTable}>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Название</th>
+            <th>Время отправления</th>
             <th>Общее количество мест</th>
             <th>Занятые места</th>
             <th>Действие</th>
@@ -43,12 +43,12 @@ const HomePage = () => {
         <tbody>
           {buses.sort((a, b) => b.id - a.id).map((bus) => (
             <tr key={bus.id}>
-              <td>{bus.id}</td>
               <td>{bus.busName}</td>
+              <td>{bus.busDate}</td>
               <td>{bus.totalSeats}</td>
               <td>
-                {bus.selectedSeats.map((seat) => (
-                  <div key={seat}>{seat}</div>
+                {bus.selectedSeats.map((s) => (
+                  <p key={s.seat}>{s.seat} – {s.name}</p>
                 ))}
               </td>
               <td>

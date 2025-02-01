@@ -6,10 +6,13 @@ import styles from './page.module.css';
 
 const BusCreation = () => {
   const router = useRouter();
-  const [busName, setBusName] = useState("Автобус №1");
+  const [busName, setBusName] = useState("Автобус №");
+  const [busDate, setBusDate] = useState(Date.now());
+
   const [totalSeats, setTotalSeats] = useState(40);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [manualSeat, setManualSeat] = useState('');
+  const [manualName, setManualName] = useState('');
 
   // В каждом ряду 4 места (2 слева и 2 справа, между ними проход)
   const seatsPerRow = 4;
@@ -17,10 +20,15 @@ const BusCreation = () => {
 
   // Обработка клика по месту (переключение состояния "выбрано")
   const handleSeatClick = (seatId) => {
+    const bookedSeat = {
+      seat: seatId,
+      name: '',
+    };
+  
     setSelectedSeats((prev) =>
-      prev.includes(seatId)
-        ? prev.filter((id) => id !== seatId)
-        : [...prev, seatId]
+      prev.some((s) => s.seat === bookedSeat.seat)
+        ? prev.filter((s) => s.seat !== seatId)
+        : [...prev, bookedSeat]
     );
   };
 
@@ -39,7 +47,7 @@ const BusCreation = () => {
                 <BusSeat
                   key={globalSeatNumber}
                   seat={globalSeatNumber}
-                  isSelected={selectedSeats.includes(String(globalSeatNumber))}
+                  isSelected={selectedSeats.some((s) => s.seat === String(globalSeatNumber))}
                   onClick={() => handleSeatClick(String(globalSeatNumber))}
                 />
               );
@@ -62,7 +70,7 @@ const BusCreation = () => {
                 <BusSeat
                   key={globalSeatNumber}
                   seat={globalSeatNumber}
-                  isSelected={selectedSeats.includes(String(globalSeatNumber))}
+                  isSelected={selectedSeats.some((s) => s.seat === String(globalSeatNumber))}
                   onClick={() => handleSeatClick(String(globalSeatNumber))}
                 />
               );
@@ -83,6 +91,7 @@ const BusCreation = () => {
   // Ручное добавление места – ввод номера ряда и кресла, затем вычисление глобального номера
   const handleManualAdd = () => {
     const seat = parseInt(manualSeat, 10);
+
     if (
       isNaN(seat) ||
       seat < 1 ||
@@ -93,15 +102,23 @@ const BusCreation = () => {
       );
       return;
     }
-    const globalSeatNumber = seat;
-    if (globalSeatNumber > totalSeats) {
+
+    const bookedSeat = {
+      seat: String(seat),
+      name: manualName,
+    };
+
+    if (bookedSeat.seat > totalSeats) {
       alert('Такого места нет в автобусе.');
       return;
     }
-    if (!selectedSeats.includes(String(globalSeatNumber))) {
-      setSelectedSeats([...selectedSeats, String(globalSeatNumber)]);
+
+    if (!selectedSeats.some((s) => s.seat === bookedSeat.seat)) {
+      setSelectedSeats([...selectedSeats, bookedSeat]);
     }
+
     setManualSeat('');
+    setManualName('');
   };
 
   // Сохранение автобуса (локальное сохранение в localStorage) и переход на главную страницу
@@ -109,6 +126,7 @@ const BusCreation = () => {
     const busData = {
       id: Date.now(),
       busName,
+      busDate,
       totalSeats,
       selectedSeats,
     };
@@ -144,6 +162,16 @@ const BusCreation = () => {
             />
           </div>
           <div className={styles.formGroup}>
+            <label>Дата отправления:</label>
+            <input
+              type="date"
+              value={busDate}
+              onChange={(e) =>
+                setBusDate(e.target.value)
+              }
+            />
+          </div>
+          <div className={styles.formGroup}>
             <label>Общее количество мест:</label>
             <input
               type="number"
@@ -162,7 +190,14 @@ const BusCreation = () => {
               onChange={(e) => setManualSeat(e.target.value)}
               placeholder="Например, 3"
             />
-            <button onClick={handleManualAdd}>Добавить место</button>
+            <label>ФИО клиента:</label>
+            <input
+              type="text"
+              value={manualName}
+              onChange={(e) => setManualName(e.target.value)}
+              placeholder="Например, Иван"
+            />
+            <button onClick={handleManualAdd}>Забронировать место</button>
           </div>
           {/* Таблица выбранных (занятых) мест – теперь два столбца: Ряд и Кресло */}
           <div className={styles.selectedSeatsTable}>
@@ -172,19 +207,21 @@ const BusCreation = () => {
                 <tr>
                   <th>Ряд</th>
                   <th>Кресло</th>
+                  <th>Клиент</th>
                   <th>Действие</th>
                 </tr>
               </thead>
               <tbody>
-                {selectedSeats.map((seatId) => {
-                  const seatNum = parseInt(seatId, 10);
+                {selectedSeats.map((s) => {
+                  const seatNum = parseInt(s.seat, 10);
                   const row = Math.floor((seatNum - 1) / seatsPerRow) + 1;
                   return (
-                    <tr key={seatId}>
+                    <tr key={s.seat}>
                       <td>{row}</td>
                       <td>{seatNum}</td>
+                      <td>{s.name}</td>
                       <td>
-                        <button onClick={() => handleSeatClick(seatId)}>
+                        <button onClick={() => handleSeatClick(s.seat)}>
                           Удалить
                         </button>
                       </td>
@@ -195,7 +232,7 @@ const BusCreation = () => {
             </table>
           </div>
           <button className={styles.saveButton} onClick={handleSave}>
-            Сохранить
+            Создать автобус
           </button>
         </div>
       </div>

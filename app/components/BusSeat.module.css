@@ -1,0 +1,22 @@
+.seat {
+    width: 50px;
+    height: 50px;
+    background-color: #edf2f7;
+    border: 2px solid #cbd5e0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+  }
+  
+  .seat:hover {
+    background-color: #e2e8f0;
+    transform: scale(1.05);
+  }
+  
+  .selectedSeat {
+    background-color: #fc8181;
+    border-color: #e53e3e;
+  }

@@ -1,16 +1,22 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import BusSeat from '../../../components/BusSeat';
+import BusSeat from '@/app/components/BusSeat';
 import styles from '../../create/page.module.css';
 
 const BusEdit = () => {
   const router = useRouter();
   const { id } = useParams();
-  const [busName, setBusName] = useState("");
-  const [totalSeats, setTotalSeats] = useState(0);
+
+  const [busName, setBusName] = useState("Автобус №");
+  const [busDate, setBusDate] = useState(Date.now());
+
+  const [totalSeats, setTotalSeats] = useState(40);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [manualSeat, setManualSeat] = useState('');
+  const [manualName, setManualName] = useState('');
+
+  // В каждом ряду 4 места (2 слева и 2 справа, между ними проход)
   const seatsPerRow = 4;
   const numberOfRows = Math.ceil(totalSeats / seatsPerRow);
 
@@ -21,56 +27,76 @@ const BusEdit = () => {
       const bus = buses.find((b) => b.id.toString() === id);
       if (bus) {
         setBusName(bus.busName);
+        setBusDate(bus.busDate);
         setTotalSeats(bus.totalSeats);
         setSelectedSeats(bus.selectedSeats);
       }
     }
   }, [id]);
 
+  // Обработка клика по месту (переключение состояния "выбрано")
   const handleSeatClick = (seatId) => {
-    setSelectedSeats(prev =>
-      prev.includes(seatId)
-        ? prev.filter(id => id !== seatId)
-        : [...prev, seatId]
+    const bookedSeat = {
+      seat: seatId,
+      name: '',
+    };
+  
+    setSelectedSeats((prev) =>
+      prev.some((s) => s.seat === bookedSeat.seat)
+        ? prev.filter((s) => s.seat !== seatId)
+        : [...prev, bookedSeat]
     );
   };
 
+  // Рендеринг ряда:
+  // Слева выводится номер ряда, далее две группы сидений с проходом между ними.
+  // Глобальный номер места вычисляется как: (rowIndex * seatsPerRow + seatPos + 1)
   const renderRow = (rowIndex) => (
     <div key={rowIndex} className={styles.row}>
       <div className={styles.rowNumber}>{rowIndex + 1}</div>
       <div className={styles.seatRowContainer}>
         <div className={styles.seatGroup}>
-          {[0, 1].map(seatPos => {
+          {[0, 1].map((seatPos) => {
             const globalSeatNumber = rowIndex * seatsPerRow + seatPos + 1;
             if (globalSeatNumber <= totalSeats) {
               return (
                 <BusSeat
                   key={globalSeatNumber}
                   seat={globalSeatNumber}
-                  isSelected={selectedSeats.includes(String(globalSeatNumber))}
+                  isSelected={selectedSeats.some((s) => s.seat === String(globalSeatNumber))}
                   onClick={() => handleSeatClick(String(globalSeatNumber))}
                 />
               );
             } else {
-              return <div key={`empty-${rowIndex}-${seatPos}`} className={styles.emptySeat}></div>;
+              return (
+                <div
+                  key={`empty-${rowIndex}-${seatPos}`}
+                  className={styles.emptySeat}
+                ></div>
+              );
             }
           })}
         </div>
         <div className={styles.aisle}></div>
         <div className={styles.seatGroup}>
-          {[2, 3].map(seatPos => {
+          {[2, 3].map((seatPos) => {
             const globalSeatNumber = rowIndex * seatsPerRow + seatPos + 1;
             if (globalSeatNumber <= totalSeats) {
               return (
                 <BusSeat
                   key={globalSeatNumber}
                   seat={globalSeatNumber}
-                  isSelected={selectedSeats.includes(String(globalSeatNumber))}
+                  isSelected={selectedSeats.some((s) => s.seat === String(globalSeatNumber))}
                   onClick={() => handleSeatClick(String(globalSeatNumber))}
                 />
               );
             } else {
-              return <div key={`empty-${rowIndex}-${seatPos}`} className={styles.emptySeat}></div>;
+              return (
+                <div
+                  key={`empty-${rowIndex}-${seatPos}`}
+                  className={styles.emptySeat}
+                ></div>
+              );
             }
           })}
         </div>
@@ -78,8 +104,10 @@ const BusEdit = () => {
     </div>
   );
 
+  // Ручное добавление места – ввод номера ряда и кресла, затем вычисление глобального номера
   const handleManualAdd = () => {
     const seat = parseInt(manualSeat, 10);
+
     if (
       isNaN(seat) ||
       seat < 1 ||
@@ -90,21 +118,31 @@ const BusEdit = () => {
       );
       return;
     }
-    const globalSeatNumber = seat;
-    if (globalSeatNumber > totalSeats) {
+
+    const bookedSeat = {
+      seat: String(seat),
+      name: manualName,
+    };
+
+    if (bookedSeat.seat > totalSeats) {
       alert('Такого места нет в автобусе.');
       return;
     }
-    if (!selectedSeats.includes(String(globalSeatNumber))) {
-      setSelectedSeats([...selectedSeats, String(globalSeatNumber)]);
+
+    if (!selectedSeats.some((s) => s.seat === bookedSeat.seat)) {
+      setSelectedSeats([...selectedSeats, bookedSeat]);
     }
+
     setManualSeat('');
+    setManualName('');
   };
 
+    // Сохранение автобуса (локальное сохранение в localStorage) и переход на главную страницу
   const handleSave = () => {
     const busData = {
-      id: parseInt(id, 10),
+      id: Date.now(),
       busName,
+      busDate,
       totalSeats,
       selectedSeats,
     };
@@ -118,14 +156,16 @@ const BusEdit = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>Редактирование автобуса</h1>
+      <h1 className={styles.pageTitle}>Создание автобуса</h1>
       <div className={styles.creationContent}>
+        {/* Карточка с планом автобуса */}
         <div className={styles.busLayout}>
           <h2 className={styles.sectionTitle}>План автобуса</h2>
           {Array.from({ length: numberOfRows }).map((_, rowIndex) =>
             renderRow(rowIndex)
           )}
         </div>
+        {/* Карточка с данными автобуса */}
         <div className={styles.busDataForm}>
           <h2 className={styles.sectionTitle}>Данные автобуса</h2>
           <div className={styles.formGroup}>
@@ -134,6 +174,16 @@ const BusEdit = () => {
               type="text"
               value={busName}
               onChange={(e) => setBusName(e.target.value)}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label>Дата отправления:</label>
+            <input
+              type="date"
+              value={busDate}
+              onChange={(e) =>
+                setBusDate(e.target.value)
+              }
             />
           </div>
           <div className={styles.formGroup}>
@@ -146,6 +196,7 @@ const BusEdit = () => {
               }
             />
           </div>
+          {/* Форма ручного ввода */}
           <div className={styles.manualInput}>
             <label>Кресло:</label>
             <input
@@ -154,8 +205,16 @@ const BusEdit = () => {
               onChange={(e) => setManualSeat(e.target.value)}
               placeholder="Например, 3"
             />
-            <button onClick={handleManualAdd}>Добавить место</button>
+            <label>ФИО клиента:</label>
+            <input
+              type="text"
+              value={manualName}
+              onChange={(e) => setManualName(e.target.value)}
+              placeholder="Например, Иван"
+            />
+            <button onClick={handleManualAdd}>Забронировать место</button>
           </div>
+          {/* Таблица выбранных (занятых) мест – теперь два столбца: Ряд и Кресло */}
           <div className={styles.selectedSeatsTable}>
             <h3>Занятые места</h3>
             <table>
@@ -163,19 +222,21 @@ const BusEdit = () => {
                 <tr>
                   <th>Ряд</th>
                   <th>Кресло</th>
+                  <th>Клиент</th>
                   <th>Действие</th>
                 </tr>
               </thead>
               <tbody>
-                {selectedSeats.map((seatId) => {
-                  const seatNum = parseInt(seatId, 10);
+                {selectedSeats.map((s) => {
+                  const seatNum = parseInt(s.seat, 10);
                   const row = Math.floor((seatNum - 1) / seatsPerRow) + 1;
                   return (
-                    <tr key={seatId}>
+                    <tr key={s.seat}>
                       <td>{row}</td>
                       <td>{seatNum}</td>
+                      <td>{s.name}</td>
                       <td>
-                        <button onClick={() => handleSeatClick(seatId)}>
+                        <button onClick={() => handleSeatClick(s.seat)}>
                           Удалить
                         </button>
                       </td>

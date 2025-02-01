@@ -1,0 +1,214 @@
+/* Основной контейнер страницы */
+.container {
+  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  min-height: 100vh;
+}
+
+/* Заголовок страницы */
+.pageTitle {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2d3748;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* Контейнер для двух карточек: план автобуса и форма данных */
+.creationContent {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Карточка для плана автобуса */
+.busLayout {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+/* Карточка для данных автобуса */
+.busDataForm {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Заголовки внутри карточек */
+.sectionTitle {
+  margin-bottom: 20px;
+  color: #2d3748;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Каждый ряд автобуса */
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+/* Номер ряда, отображаемый слева от ряда */
+.rowNumber {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  width: 40px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+/* Контейнер для сидений в ряду (две группы с проходом между ними) */
+.seatRowContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Группа сидений (левая или правая) */
+.seatGroup {
+  display: flex;
+  gap: 15px;
+}
+
+/* Проход между группами */
+.aisle {
+  width: 30px;
+}
+
+/* Стили для отдельного места */
+.seat {
+  width: 50px;
+  height: 50px;
+  background-color: #edf2f7;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.seat:hover {
+  background-color: #e2e8f0;
+  transform: scale(1.05);
+}
+
+/* Выбранное место */
+.selectedSeat {
+  background-color: #fc8181;
+  border-color: #e53e3e;
+}
+
+/* Пустой блок, если места нет */
+.emptySeat {
+  width: 50px;
+  height: 50px;
+}
+
+/* Стили для группы полей формы */
+.formGroup {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.formGroup input {
+  padding: 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+}
+
+.formGroup input:focus {
+  border-color: #63b3ed;
+}
+
+/* Секция для ручного добавления места – улучшенная форма */
+.manualInput {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #f7fafc;
+  padding: 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.manualInput label {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.manualInput input {
+  width: 80px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  outline: none;
+}
+
+.manualInput input:focus {
+  border-color: #63b3ed;
+}
+
+/* Таблица выбранных (занятых) мест – теперь один столбец с общим номером */
+.selectedSeatsTable {
+  margin-top: 25px;
+}
+
+.selectedSeatsTable table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.selectedSeatsTable th,
+.selectedSeatsTable td {
+  border: 1px solid #cbd5e0;
+  padding: 10px;
+  text-align: center;
+}
+
+.selectedSeatsTable th {
+  background-color: #edf2f7;
+  color: #2d3748;
+}
+
+/* Кнопка сохранения */
+.saveButton {
+  margin-top: 25px;
+  padding: 12px 25px;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.saveButton:hover {
+  background-color: #2f855a;
+}

@@ -8,7 +8,7 @@
 /* Hero section */
 .hero {
   position: relative;
-  padding: 6rem 2rem;
+  padding: 14rem 2rem;
   background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
   color: white;
   overflow: hidden;
@@ -105,7 +105,7 @@
 
 /* Features section */
 .features {
-  padding: 6rem 2rem;
+  padding: 10rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -157,7 +157,7 @@
 
 /* How it works section */
 .howItWorks {
-  padding: 6rem 2rem;
+  padding: 10rem 2rem;
   background: #f8fafc;
 }
 
@@ -206,7 +206,7 @@
 
 /* Interface Demo section */
 .interfaceDemo {
-  padding: 6rem 2rem;
+  padding: 12rem 2rem;
   background: white;
 }
 
@@ -269,7 +269,7 @@
 
 /* Use Cases section */
 .useCases {
-  padding: 6rem 2rem;
+  padding: 12rem 2rem;
   background: #f8fafc;
 }
 
@@ -312,7 +312,7 @@
 
 /* CTA section */
 .cta {
-  padding: 6rem 2rem;
+  padding: 12rem 2rem;
   background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
   color: white;
   text-align: center;

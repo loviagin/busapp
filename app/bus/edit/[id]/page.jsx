@@ -165,7 +165,7 @@ const BusEdit = () => {
     let buses = storedBuses ? JSON.parse(storedBuses) : [];
     buses = buses.map(b => (b.id.toString() === id ? busData : b));
     localStorage.setItem('buses', JSON.stringify(buses));
-    router.push('/');
+    router.push('/account/buses');
   };
 
   return (

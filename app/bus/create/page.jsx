@@ -150,7 +150,7 @@ const BusCreation = () => {
     buses.push(busData);
     localStorage.setItem('buses', JSON.stringify(buses));
 
-    router.push('/');
+    router.push('/account/buses');
   };
 
   return (

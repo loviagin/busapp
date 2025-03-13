@@ -1,69 +1,416 @@
-.container {
-    padding: 40px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    min-height: 100vh;
+.mainContainer {
+  max-width: 100%;
+  min-height: 100vh;
+  background: var(--background);
+  overflow-x: hidden;
+}
+
+/* Hero section */
+.hero {
+  position: relative;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: white;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroHighlight {
+  font-size: 2rem;
+  color: #93c5fd;
+  margin-top: 0.5rem;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.heroGraphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.circle1, .circle2, .circle3 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  background: white;
+}
+
+.circle1 {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  right: -50px;
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle2 {
+  width: 200px;
+  height: 200px;
+  bottom: -30px;
+  left: 10%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.circle3 {
+  width: 150px;
+  height: 150px;
+  top: 30%;
+  right: 20%;
+  animation: float 7s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Features section */
+.features {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1e40af;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature {
+  padding: 2.5rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+  border: 1px solid #e5e7eb;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.featureIcon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature h3 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.feature p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* How it works section */
+.howItWorks {
+  padding: 6rem 2rem;
+  background: #f8fafc;
+}
+
+.steps {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+  padding: 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.stepNumber {
+  width: 48px;
+  height: 48px;
+  background: #1e40af;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin: 0 auto 1.5rem;
+  font-size: 1.25rem;
+}
+
+.step h3 {
+  color: #1e40af;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.step p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Interface Demo section */
+.interfaceDemo {
+  padding: 6rem 2rem;
+  background: white;
+}
+
+.demoGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.demoCard {
+  background: #f8fafc;
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s;
+}
+
+.demoCard:hover {
+  transform: translateY(-5px);
+}
+
+.demoHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.demoIcon {
+  font-size: 2rem;
+}
+
+.demoHeader h3 {
+  color: #1e40af;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.demoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.demoList li {
+  color: #4b5563;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demoList li::before {
+  content: "✓";
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+/* Use Cases section */
+.useCases {
+  padding: 6rem 2rem;
+  background: #f8fafc;
+}
+
+.useCasesGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.useCase {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s;
+}
+
+.useCase:hover {
+  transform: translateY(-5px);
+}
+
+.useCaseIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.useCase h3 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.useCase p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* CTA section */
+.cta {
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: white;
+  text-align: center;
+}
+
+.ctaContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaContent h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ctaContent p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Buttons */
+.primaryButton {
+  background: white;
+  color: #1e40af;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.primaryButton:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.secondaryButton {
+  background: transparent;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid white;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 3rem;
   }
   
-  .pageTitle {
+  .heroHighlight {
+    font-size: 1.5rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.25rem;
+  }
+  
+  .heroButtons, .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .steps, .demoGrid, .useCasesGrid {
+    gap: 2rem;
+  }
+
+  .feature, .step, .demoCard, .useCase {
+    padding: 1.5rem;
+  }
+
+  .demoHeader {
+    flex-direction: column;
     text-align: center;
-    margin-bottom: 30px;
-    color: #2d3748;
-    font-size: 2.5rem;
-    font-weight: 700;
+    gap: 0.5rem;
   }
-  
-  .createButton {
-    max-width: 900px;
-    display: block;
-    margin: 0 auto 20px;
-    padding: 12px 20px;
-    background-color: #4299e1;
-    color: #fff;
-    text-align: center;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .busTable {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .busTable th,
-  .busTable td {
-    padding: 12px;
-    border: 1px solid #e2e8f0;
-    text-align: center;
-  }
-  
-  .editButton {
-    padding: 6px 12px;
-    background-color: #38a169;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  
-  .deleteButton {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 4px 8px;
-    color: #e53e3e;
-    font-size: 14px;
-    transition: color 0.3s ease;
-  }
-  
-  .deleteButton:hover {
-    color: #c53030;
-  }
+}
   

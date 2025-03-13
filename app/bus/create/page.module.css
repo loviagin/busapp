@@ -1,269 +1,271 @@
 /* Основной контейнер страницы */
 .container {
-  padding: 40px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
   min-height: 100vh;
 }
 
 /* Заголовок страницы */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
 .pageTitle {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #2d3748;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  color: #1e40af;
+  margin: 0;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.backButton:hover {
+  background: #f3f4f6;
+  color: #1e40af;
 }
 
 /* Контейнер для двух карточек: план автобуса и форма данных */
 .creationContent {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 /* Карточка для плана автобуса */
 .busLayout {
-  background: #fff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 30px;
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid #e5e7eb;
 }
 
 /* Карточка для данных автобуса */
 .busDataForm {
-  background: #fff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid #e5e7eb;
 }
 
 /* Заголовки внутри карточек */
 .sectionTitle {
-  margin-bottom: 20px;
-  color: #2d3748;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  color: #1e40af;
+  margin: 0 0 1.5rem 0;
 }
 
 /* Каждый ряд автобуса */
 .row {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
-  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 /* Номер ряда, отображаемый слева от ряда */
 .rowNumber {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #2d3748;
   width: 40px;
-  text-align: right;
-  margin-right: 10px;
+  text-align: center;
+  color: #6b7280;
+  font-weight: 500;
 }
 
 /* Контейнер для сидений в ряду (две группы с проходом между ними) */
 .seatRowContainer {
   display: flex;
-  align-items: center;
+  gap: 1rem;
+  flex: 1;
 }
 
 /* Группа сидений (левая или правая) */
 .seatGroup {
   display: flex;
-  gap: 15px;
-}
-
-/* Проход между группами */
-.aisle {
-  width: 30px;
-}
-
-/* Стили для отдельного места */
-.seat {
-  width: 50px;
-  height: 50px;
-  background-color: #edf2f7;
-  border: 2px solid #cbd5e0;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-.seat:hover {
-  background-color: #e2e8f0;
-  transform: scale(1.05);
-}
-
-/* Выбранное место */
-.selectedSeat {
-  background-color: #fc8181;
-  border-color: #e53e3e;
+  gap: 0.5rem;
+  flex: 1;
 }
 
 /* Пустой блок, если места нет */
 .emptySeat {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
+  border: 2px dashed #e5e7eb;
+  border-radius: 8px;
 }
 
 /* Стили для группы полей формы */
 .formGroup {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 1.5rem;
 }
 
 .formGroup label {
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #2d3748;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-weight: 500;
 }
 
 .formGroup input {
-  padding: 10px;
-  border: 1px solid #cbd5e0;
-  border-radius: 6px;
-  font-size: 16px;
-  outline: none;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
 }
 
 .formGroup input:focus {
-  border-color: #63b3ed;
+  outline: none;
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
 }
 
 /* Секция для ручного добавления места – улучшенная форма */
 .manualInput {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  background-color: #f7fafc;
-  padding: 10px;
-  border: 1px solid #cbd5e0;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 0.5rem;
 }
 
 .manualInput label {
-  font-weight: 600;
-  color: #2d3748;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-weight: 500;
 }
 
 .manualInput input {
-  width: 80px;
-  padding: 6px 8px;
-  border: 1px solid #cbd5e0;
-  border-radius: 4px;
-  outline: none;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
-.manualInput input:focus {
-  border-color: #63b3ed;
+.manualInput button {
+  background: #1e40af;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-/* Таблица выбранных (занятых) мест – теперь один столбец с общим номером */
+.manualInput button:hover {
+  background: #1e3a8a;
+  transform: translateY(-1px);
+}
+
+/* Таблица выбранных (занятых) мест */
 .selectedSeatsTable {
-  margin-top: 25px;
+  margin-bottom: 2rem;
 }
 
 .selectedSeatsTable h3 {
-  margin-bottom: 15px;
-  color: #2d3748;
-  font-size: 1.5rem;
-  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #374151;
+  font-size: 1.25rem;
 }
 
 .selectedSeatsTable table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
 }
 
 .selectedSeatsTable th,
 .selectedSeatsTable td {
-  border: 1px solid #cbd5e0;
-  padding: 10px;
-  text-align: center;
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .selectedSeatsTable th {
-  background-color: #edf2f7;
-  color: #2d3748;
+  background: #f8fafc;
+  font-weight: 600;
+  color: #374151;
+}
+
+.selectedSeatsTable button {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+
+.selectedSeatsTable button:hover {
+  background: #fee2e2;
 }
 
 /* Кнопка сохранения */
 .saveButton {
-  margin-top: 25px;
-  padding: 12px 25px;
-  background-color: #38a169;
+  width: 100%;
+  background: #1e40af;
   color: white;
   border: none;
-  border-radius: 8px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1.125rem;
   cursor: pointer;
-  font-size: 16px;
-  width: 100%;
-  transition: background-color 0.3s;
+  transition: all 0.2s;
 }
 
 .saveButton:hover {
-  background-color: #2f855a;
+  background: #1e3a8a;
+  transform: translateY(-1px);
 }
 
-.manualInput {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background-color: #f7fafc;
-  padding: 12px 16px;
-  border: 1px solid #cbd5e0;
-  border-radius: 8px;
-  margin-bottom: 20px;
+@media (max-width: 1024px) {
+  .creationContent {
+    grid-template-columns: 1fr;
+  }
 }
 
-.manualInput label {
-  font-weight: 600;
-  color: #2d3748;
-  margin-right: 4px;
-  white-space: nowrap;
-}
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
 
-.manualInput input {
-  width: 135px;
-  padding: 8px 10px;
-  border: 1px solid #cbd5e0;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
 
-.manualInput input:focus {
-  border-color: #63b3ed;
-  box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.3);
-  outline: none;
-}
+  .busLayout,
+  .busDataForm {
+    padding: 1rem;
+  }
 
-.manualInput button {
-  padding: 8px 16px;
-  background-color: #38a169;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  .seatGroup {
+    gap: 0.25rem;
+  }
 
-.manualInput button:hover {
-  background-color: #2f855a;
+  .emptySeat {
+    width: 50px;
+    height: 50px;
+  }
+
+  .manualInput {
+    padding: 1rem;
+  }
 }

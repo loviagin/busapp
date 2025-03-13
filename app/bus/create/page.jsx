@@ -24,7 +24,7 @@ const BusCreation = () => {
       seat: seatId,
       name: '',
     };
-  
+
     setSelectedSeats((prev) =>
       prev.some((s) => s.seat === bookedSeat.seat)
         ? prev.filter((s) => s.seat !== seatId)
@@ -46,9 +46,16 @@ const BusCreation = () => {
               return (
                 <BusSeat
                   key={globalSeatNumber}
-                  seat={globalSeatNumber}
+                  seat={String(globalSeatNumber)}
                   isSelected={selectedSeats.some((s) => s.seat === String(globalSeatNumber))}
-                  onClick={() => handleSeatClick(String(globalSeatNumber))}
+                  isOccupied={selectedSeats.some((s) => s.seat === String(globalSeatNumber) && s.name)}
+                  passengerName={selectedSeats.find((s) => s.seat === String(globalSeatNumber))?.name}
+                  onClick={handleSeatClick}
+                  onNameChange={(seat, name) => {
+                    setSelectedSeats(prev => 
+                      prev.map(s => s.seat === seat ? { ...s, name } : s)
+                    );
+                  }}
                 />
               );
             } else {
@@ -69,9 +76,16 @@ const BusCreation = () => {
               return (
                 <BusSeat
                   key={globalSeatNumber}
-                  seat={globalSeatNumber}
+                  seat={String(globalSeatNumber)}
                   isSelected={selectedSeats.some((s) => s.seat === String(globalSeatNumber))}
-                  onClick={() => handleSeatClick(String(globalSeatNumber))}
+                  isOccupied={selectedSeats.some((s) => s.seat === String(globalSeatNumber) && s.name)}
+                  passengerName={selectedSeats.find((s) => s.seat === String(globalSeatNumber))?.name}
+                  onClick={handleSeatClick}
+                  onNameChange={(seat, name) => {
+                    setSelectedSeats(prev => 
+                      prev.map(s => s.seat === seat ? { ...s, name } : s)
+                    );
+                  }}
                 />
               );
             } else {
@@ -141,7 +155,12 @@ const BusCreation = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>Создание автобуса</h1>
+      <div className={styles.header}>
+        <h1 className={styles.pageTitle}>Создание автобуса</h1>
+        <button className={styles.backButton} onClick={() => router.push('/account/buses')}>
+          ← Назад
+        </button>
+      </div>
       <div className={styles.creationContent}>
         {/* Карточка с планом автобуса */}
         <div className={styles.busLayout}>

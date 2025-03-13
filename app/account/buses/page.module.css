@@ -1,0 +1,285 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  color: #1e40af;
+  margin: 0;
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1e40af;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.createButton:hover {
+  background: #1e3a8a;
+  transform: translateY(-2px);
+}
+
+.createButtonIcon {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.searchBox {
+  flex: 1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.sortBox {
+  min-width: 200px;
+}
+
+.sortSelect {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sortSelect:focus {
+  outline: none;
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.busGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.busCard {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s;
+}
+
+.busCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.busHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.busName {
+  font-size: 1.25rem;
+  color: #1e40af;
+  margin: 0;
+}
+
+.busDate {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.busInfo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 0.5rem;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.infoLabel {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.infoValue {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.busActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.editButton, .deleteButton {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.editButton {
+  background: #1e40af;
+  color: white;
+  border: none;
+}
+
+.editButton:hover {
+  background: #1e3a8a;
+}
+
+.deleteButton {
+  background: white;
+  color: #dc2626;
+  border: 1px solid #dc2626;
+}
+
+.deleteButton:hover {
+  background: #fee2e2;
+}
+
+.passengersList {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.passengersTitle {
+  font-size: 1rem;
+  color: #1e40af;
+  margin: 0 0 1rem 0;
+}
+
+.passengersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.passengerItem {
+  background: #f8fafc;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.seatNumber {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.passengerName {
+  font-size: 0.875rem;
+  color: #1e40af;
+  font-weight: 500;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #f8fafc;
+  border-radius: 1rem;
+  border: 2px dashed #e5e7eb;
+}
+
+.emptyStateIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.emptyState h2 {
+  color: #1e40af;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.emptyState p {
+  color: #6b7280;
+  margin: 0 0 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .sortBox {
+    min-width: 100%;
+  }
+
+  .busGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .busInfo {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .busActions {
+    flex-direction: column;
+  }
+} 

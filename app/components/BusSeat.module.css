@@ -1,22 +1,94 @@
 .seat {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.seat:hover {
+  border-color: #1e40af;
+  transform: translateY(-2px);
+}
+
+.seat.selected {
+  border-color: #1e40af;
+  background: #eff6ff;
+}
+
+.seat.occupied {
+  border-color: #059669;
+  background: #ecfdf5;
+}
+
+.seat.driverSeat {
+  border-color: #6b7280;
+  background: #f3f4f6;
+}
+
+.seatNumber {
+  font-weight: 500;
+  color: #374151;
+}
+
+.passengerInput {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background: white;
+  text-align: center;
+}
+
+.passengerInput:focus {
+  outline: none;
+  border-color: #1e40af;
+}
+
+.passengerName {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #059669;
+  white-space: nowrap;
+}
+
+.driverLabel {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  .seat {
     width: 50px;
     height: 50px;
-    background-color: #edf2f7;
-    border: 2px solid #cbd5e0;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
   }
-  
-  .seat:hover {
-    background-color: #e2e8f0;
-    transform: scale(1.05);
+
+  .passengerInput,
+  .passengerName,
+  .driverLabel {
+    font-size: 0.7rem;
+    bottom: -20px;
   }
-  
-  .selectedSeat {
-    background-color: #fc8181;
-    border-color: #e53e3e;
+
+  .passengerInput {
+    width: 100px;
   }
+}
